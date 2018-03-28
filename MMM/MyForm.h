@@ -535,7 +535,7 @@ namespace MMM {
 			h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((((amplituda*sin(omega*x)) + amplituda) - (A*sqrt(2 * g*h))) / (PI*h));
 		}
 		else	if (zbiornik == 2) {
-			h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = (x - (A*sqrt(2 * g*h))) / (PI*h));
+			h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = ((x - (A*sqrt(2 * g*h))) / (PI*h));
 		}
 		else {
 			MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
