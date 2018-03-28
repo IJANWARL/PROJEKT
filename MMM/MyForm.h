@@ -21,7 +21,14 @@ namespace MMM {
 	{
 
 		static double PI = M_PI;
-		static double g= 9.80665;
+		static double g = 9.80665;
+	private: System::Windows::Forms::Button^  clear1;
+	private: System::Windows::Forms::Button^  clear2;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^  Wykres3;
+	private: System::Windows::Forms::Button^  clear3;
+	private: System::Windows::Forms::Button^  clear4;
+
+
 
 			 static int p = 1;
 	public:
@@ -117,6 +124,11 @@ namespace MMM {
 			System::Windows::Forms::DataVisualization::Charting::Title^  title4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			System::Windows::Forms::DataVisualization::Charting::Title^  title5 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			System::Windows::Forms::DataVisualization::Charting::Title^  title6 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea3 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Title^  title7 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
+			System::Windows::Forms::DataVisualization::Charting::Title^  title8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
+			System::Windows::Forms::DataVisualization::Charting::Title^  title9 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->Start = (gcnew System::Windows::Forms::Button());
 			this->Sinus = (gcnew System::Windows::Forms::RadioButton());
@@ -143,8 +155,14 @@ namespace MMM {
 			this->Czas_T = (gcnew System::Windows::Forms::TextBox());
 			this->Dok_T = (gcnew System::Windows::Forms::TextBox());
 			this->Dokladnosc = (gcnew System::Windows::Forms::Label());
+			this->clear1 = (gcnew System::Windows::Forms::Button());
+			this->clear2 = (gcnew System::Windows::Forms::Button());
+			this->Wykres3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->clear3 = (gcnew System::Windows::Forms::Button());
+			this->clear4 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// Start
@@ -320,14 +338,14 @@ namespace MMM {
 			this->Wykres2->BackColor = System::Drawing::Color::LightBlue;
 			chartArea1->Name = L"ChartArea1";
 			this->Wykres2->ChartAreas->Add(chartArea1);
-			this->Wykres2->Location = System::Drawing::Point(781, 173);
+			this->Wykres2->Location = System::Drawing::Point(967, 157);
 			this->Wykres2->Name = L"Wykres2";
 			this->Wykres2->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::Bright;
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
 			series1->Name = L"H2(t)";
 			this->Wykres2->Series->Add(series1);
-			this->Wykres2->Size = System::Drawing::Size(487, 426);
+			this->Wykres2->Size = System::Drawing::Size(316, 307);
 			this->Wykres2->TabIndex = 23;
 			this->Wykres2->Text = L"Zbiornik 2";
 			title1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -349,7 +367,7 @@ namespace MMM {
 			this->Wykres1->BackColor = System::Drawing::Color::LightBlue;
 			chartArea2->Name = L"ChartArea1";
 			this->Wykres1->ChartAreas->Add(chartArea2);
-			this->Wykres1->Location = System::Drawing::Point(288, 173);
+			this->Wykres1->Location = System::Drawing::Point(604, 157);
 			this->Wykres1->Name = L"Wykres1";
 			this->Wykres1->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::Bright;
 			this->Wykres1->RightToLeft = System::Windows::Forms::RightToLeft::No;
@@ -358,7 +376,7 @@ namespace MMM {
 			series2->MarkerStep = 2;
 			series2->Name = L"H1(t)";
 			this->Wykres1->Series->Add(series2);
-			this->Wykres1->Size = System::Drawing::Size(487, 426);
+			this->Wykres1->Size = System::Drawing::Size(365, 307);
 			this->Wykres1->TabIndex = 22;
 			this->Wykres1->Text = L"Zbiprnik 1";
 			title4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -447,12 +465,106 @@ namespace MMM {
 			this->Dokladnosc->TabIndex = 31;
 			this->Dokladnosc->Text = L"Dok³adnoœæ (100=ma³a, 100000=du¿a)";
 			// 
+			// clear1
+			// 
+			this->clear1->BackColor = System::Drawing::Color::SteelBlue;
+			this->clear1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->clear1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->clear1->Location = System::Drawing::Point(607, 424);
+			this->clear1->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
+			this->clear1->Name = L"clear1";
+			this->clear1->Size = System::Drawing::Size(90, 40);
+			this->clear1->TabIndex = 32;
+			this->clear1->Text = L"Clear";
+			this->clear1->UseVisualStyleBackColor = false;
+			this->clear1->Click += gcnew System::EventHandler(this, &MyForm::clear1_Click);
+			// 
+			// clear2
+			// 
+			this->clear2->BackColor = System::Drawing::Color::SteelBlue;
+			this->clear2->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->clear2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->clear2->Location = System::Drawing::Point(967, 424);
+			this->clear2->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
+			this->clear2->Name = L"clear2";
+			this->clear2->Size = System::Drawing::Size(90, 40);
+			this->clear2->TabIndex = 33;
+			this->clear2->Text = L"Clear";
+			this->clear2->UseVisualStyleBackColor = false;
+			this->clear2->Click += gcnew System::EventHandler(this, &MyForm::clear2_Click_1);
+			// 
+			// Wykres3
+			// 
+			this->Wykres3->BackColor = System::Drawing::Color::LightBlue;
+			chartArea3->Name = L"ChartArea1";
+			this->Wykres3->ChartAreas->Add(chartArea3);
+			this->Wykres3->Location = System::Drawing::Point(286, 157);
+			this->Wykres3->Name = L"Wykres3";
+			this->Wykres3->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::Bright;
+			series3->ChartArea = L"ChartArea1";
+			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
+			series3->Name = L"H2(t)";
+			this->Wykres3->Series->Add(series3);
+			this->Wykres3->Size = System::Drawing::Size(316, 307);
+			this->Wykres3->TabIndex = 34;
+			this->Wykres3->Text = L"Sygna³ wp³ywaj¹cy";
+			title7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			title7->Name = L"Title1";
+			title7->Text = L"Wysokoœæ s³upa wody w zbiorniku 2";
+			title8->Docking = System::Windows::Forms::DataVisualization::Charting::Docking::Bottom;
+			title8->Name = L"Title2";
+			title8->Text = L"Czas [s]";
+			title9->Docking = System::Windows::Forms::DataVisualization::Charting::Docking::Left;
+			title9->Name = L"Title3";
+			title9->Text = L"Wysokoœæ [cm]";
+			this->Wykres3->Titles->Add(title7);
+			this->Wykres3->Titles->Add(title8);
+			this->Wykres3->Titles->Add(title9);
+			// 
+			// clear3
+			// 
+			this->clear3->BackColor = System::Drawing::Color::SteelBlue;
+			this->clear3->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->clear3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->clear3->Location = System::Drawing::Point(286, 424);
+			this->clear3->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
+			this->clear3->Name = L"clear3";
+			this->clear3->Size = System::Drawing::Size(90, 40);
+			this->clear3->TabIndex = 35;
+			this->clear3->Text = L"Clear";
+			this->clear3->UseVisualStyleBackColor = false;
+			this->clear3->Click += gcnew System::EventHandler(this, &MyForm::clear3_Click);
+			// 
+			// clear4
+			// 
+			this->clear4->BackColor = System::Drawing::Color::SteelBlue;
+			this->clear4->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->clear4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->clear4->Location = System::Drawing::Point(567, 540);
+			this->clear4->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
+			this->clear4->Name = L"clear4";
+			this->clear4->Size = System::Drawing::Size(217, 40);
+			this->clear4->TabIndex = 36;
+			this->clear4->Text = L"Clear all";
+			this->clear4->UseVisualStyleBackColor = false;
+			this->clear4->Click += gcnew System::EventHandler(this, &MyForm::clear4_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1283, 635);
+			this->Controls->Add(this->clear4);
+			this->Controls->Add(this->clear3);
+			this->Controls->Add(this->Wykres3);
+			this->Controls->Add(this->clear2);
+			this->Controls->Add(this->clear1);
 			this->Controls->Add(this->Dokladnosc);
 			this->Controls->Add(this->Dok_T);
 			this->Controls->Add(this->Czas_T);
@@ -484,65 +596,136 @@ namespace MMM {
 			this->Text = L"MMM";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion,
-	
-	private: void dod_pkt1 (double x, double y)
-		{
-			Wykres1->Series[0]->Points->AddXY(x, y);;
-		}
+
+	private: void dod_pkt1(double x, double y)
+	{
+		Wykres1->Series[0]->Points->AddXY(x, y);;
+	}
 
 	private: void dod_pkt2(double x, double y)
+	{
+		Wykres2->Series[0]->Points->AddXY(x, y);;
+	}
+	private: void dod_pkt3(double x, double y)
+	{
+		Wykres3->Series[0]->Points->AddXY(x, y);;
+	}
+
+	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		dod_pkt1(0, 0);
+		dod_pkt2(0, 0);
+		dod_pkt3(0, 0);
+
+		if (Amplituda_T->Text == "" || Okres_T->Text == "" || A1_T->Text == "" || A2_T->Text == "" || H1_T->Text == "" || H2_T->Text == "" || Czas_T->Text == "" || Dok_T->Text == "")
 		{
-			Wykres2->Series[0]->Points->AddXY(x, y);;
+			MessageBox::Show("Pola Ampituda, Okres, A1, A2, H1, H2, Zakres i Dok³adnoœæ nie mog¹ zostaæ puste!", "UWAGA!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return;
 		}
 
-	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) 
-		{
-			dod_pkt1(0, 0);
-			dod_pkt2(0, 0);
-		
-			if (Amplituda_T->Text == "" || Okres_T->Text == "" || A1_T->Text == "" || A2_T->Text == "" || H1_T->Text == "" || H2_T->Text == "" || Czas_T->Text == "" || Dok_T->Text == "")
-			{
-				MessageBox::Show("Pola Ampituda, Okres, A1, A2, H1, H2, Zakres i Dok³adnoœæ nie mog¹ zostaæ puste!", "UWAGA!", MessageBoxButtons::OK , MessageBoxIcon::Information);
-				return;
-			}
+		if (Convert::ToDouble(A1_T->Text) <= (Convert::ToDouble(A2_T->Text))) {
+			MessageBox::Show("Zwê¿ka A1 musi byc wieksza od zwê¿ki A2", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return;
 
-			
-			if (Sinus->Checked) { calkowanie(); }
-			else
-			{
-				MessageBox::Show("Podaj rodzaj sygna³u", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				return;
-			}
 		}
+		if (Convert::ToDouble(H1_T->Text) <= (Convert::ToDouble(H2_T->Text))) {
+			MessageBox::Show("Pierwszy zbiornik musi byæ powy¿ej drugiego", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return;
+
+		}
+
+
+		if (Sinus->Checked || Triangle->Checked || Rectangel->Checked) { calkowanie(); }
+		else
+		{
+			MessageBox::Show("Podaj rodzaj sygna³u", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return;
+		}
+	}
 
 	private:	 double funkcja(double x, int zbiornik)
-		{
+	{
 		double h = 1;
 		double A = 1;
 
+
+		double okres = (Convert::ToDouble(Okres_T->Text));
+		double omega = (2 * PI / (Convert::ToDouble(Okres_T->Text)));
+		double amplituda = Convert::ToDouble(Amplituda_T->Text);
+		double funkcja = 1;
+		if (Sinus->Checked) {
+	if (zbiornik == 1) {
+		h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((((amplituda*sin(omega*x)) + amplituda) - (A*sqrt(2 * g*h))) / (PI*h));
+	}
+	else	if (zbiornik == 2) {
+		h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = ((x - (A*sqrt(2 * g*h))) / (PI*h));
 	
-		
-		double omega =(2*PI/ (Convert::ToDouble(Okres_T->Text)));
-		double amplituda= Convert::ToDouble(Amplituda_T->Text);
-		 double funkcja = 1;
-		
-		if (zbiornik == 1) {
-			h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((((amplituda*sin(omega*x)) + amplituda) - (A*sqrt(2 * g*h))) / (PI*h));
+
+	}
+	else {
+		if (zbiornik == 0) {
+			funkcja = ((amplituda*sin(omega*x)) + amplituda);
+
 		}
-		else	if (zbiornik == 2) {
-			h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = ((x - (A*sqrt(2 * g*h))) / (PI*h));
-		}
+
 		else {
 			MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			return 1;
 		}
-			return funkcja;
-		}
+	}
+
+				
+	}
+				 if (Triangle->Checked) {
+					 okres = okres / 2;
+					 if (zbiornik == 1) {
+						 h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((amplituda / okres) * (okres - abs(fmod(x, (2 * okres)) - okres)) - (A*sqrt(2 * g*h))) / (PI*h);
+					 }
+					
+					 else {
+						 if (zbiornik == 2) {
+							 h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = ((x - (A*sqrt(2 * g*h))) / (PI*h));
+						 }
+						 else {
+							 if (zbiornik == 0) {
+								 funkcja = (amplituda / okres) * (okres - abs(fmod(x, (2 * okres)) - okres));
+							 }
+							 else {
+								 MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+								 return 1;
+							 }
+						 }
+					 }
+				 }
+
+				 if (Rectangel->Checked) {
+					 if (fmod(x, okres) >= (okres / 2)) amplituda= 0;
+					 
+					 if (zbiornik == 1) {
+						 h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((amplituda) - (A*sqrt(2 * g*h))) / (PI*h);
+					 }
+					 else	if (zbiornik == 2) {
+						 h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = ((x - (A*sqrt(2 * g*h))) / (PI*h));
+					 }
+					 else {
+						 if (zbiornik == 0) {
+							 funkcja = amplituda;
+						 }
+				 else {
+					 MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					 return 1;
+				 }
+					 }
+				 }
+				 return funkcja;
+			}
+
 
 
 	private:	 void calkowanie()
@@ -559,12 +742,15 @@ namespace MMM {
 				for (int i=0; i<dokladnosc; i++)
 				{
 					calka += (funkcja(i * h,1)+funkcja((i+1)*h,1))*h/2;
-					if (calka < 0) calka = 0;
-					temp = (funkcja(i * h, 1) + funkcja((i + 1)*h, 1))*h / 2;
-					calka2+= (funkcja(temp * h, 2) + funkcja((temp + 1)*h, 2))*h / 2;
+					
+					//temp = (funkcja(i * h, 1) + funkcja((i + 1)*h, 1))*h / 2;
+					if (calka < 0) calka2 += (funkcja(i * h, 2) + funkcja((i + 1)*h, 2))*h / 2;
+					else calka2+= (funkcja(calka * h, 2) + funkcja((calka + 1)*h, 2))*h / 2;
 					if (calka2 < 0) calka2 = 0;
+					if (calka < 0) calka = 0;
 					dod_pkt1((i+1)/p, calka);
 					dod_pkt2((i+1)/p, calka2);
+					dod_pkt3((i+1)/p, funkcja(i*h,0));
 				}
 				Wyn->Text = Convert::ToString(calka);
 
@@ -577,5 +763,23 @@ namespace MMM {
 
 
 
+private: System::Void clear1_Click(System::Object^  sender, System::EventArgs^  e) {
+	Wykres1->Series[0]->Points->Clear();
+	
+}
+
+
+private: System::Void clear2_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	Wykres2->Series[0]->Points->Clear();
+}
+
+private: System::Void clear3_Click(System::Object^  sender, System::EventArgs^  e) {
+	Wykres3->Series[0]->Points->Clear();
+}
+private: System::Void clear4_Click(System::Object^  sender, System::EventArgs^  e) {
+	Wykres1->Series[0]->Points->Clear();
+	Wykres2->Series[0]->Points->Clear();
+	Wykres3->Series[0]->Points->Clear();
+}
 };
 }
