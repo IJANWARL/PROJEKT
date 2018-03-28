@@ -525,19 +525,22 @@ namespace MMM {
 		double h = 1;
 		double A = 1;
 
+	
+		
+		double omega =(2*PI/ (Convert::ToDouble(Okres_T->Text)));
+		double amplituda= Convert::ToDouble(Amplituda_T->Text);
+		 double funkcja = 1;
+		
 		if (zbiornik == 1) {
-			  h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);
+			h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);  funkcja = ((((amplituda*sin(omega*x)) + amplituda) - (A*sqrt(2 * g*h))) / (PI*h));
 		}
-		else	if (zbiornik == 2) { h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);
+		else	if (zbiornik == 2) {
+			h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);  funkcja = (x - (A*sqrt(2 * g*h))) / (PI*h));
 		}
 		else {
 			MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			return 1;
 		}
-		
-		double omega =(2*PI/ (Convert::ToDouble(Okres_T->Text)));
-		double amplituda= Convert::ToDouble(Amplituda_T->Text);
-		double funkcja = (((amplituda*sin(omega*x)) - (A*sqrt(2 * g*h))) / (PI*h));
 			return funkcja;
 		}
 
@@ -556,8 +559,10 @@ namespace MMM {
 				for (int i=0; i<dokladnosc; i++)
 				{
 					calka += (funkcja(i * h,1)+funkcja((i+1)*h,1))*h/2;
+					if (calka < 0) calka = 0;
 					temp = (funkcja(i * h, 1) + funkcja((i + 1)*h, 1))*h / 2;
 					calka2+= (funkcja(temp * h, 2) + funkcja((temp + 1)*h, 2))*h / 2;
+					if (calka2 < 0) calka2 = 0;
 					dod_pkt1((i+1)/p, calka);
 					dod_pkt2((i+1)/p, calka2);
 				}
