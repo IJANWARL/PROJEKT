@@ -1,6 +1,8 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
 namespace MMM {
 
@@ -17,6 +19,11 @@ namespace MMM {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+
+		static double PI = M_PI;
+		static double g= 9.80665;
+
+			 static int p = 1;
 	public:
 		MyForm(void)
 		{
@@ -261,9 +268,9 @@ namespace MMM {
 			this->Okres->Location = System::Drawing::Point(346, 100);
 			this->Okres->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->Okres->Name = L"Okres";
-			this->Okres->Size = System::Drawing::Size(105, 18);
+			this->Okres->Size = System::Drawing::Size(125, 18);
 			this->Okres->TabIndex = 10;
-			this->Okres->Text = L"Okres Sygna³u";
+			this->Okres->Text = L"Okres Sygna³u [s]";
 			// 
 			// A1
 			// 
@@ -342,7 +349,7 @@ namespace MMM {
 			this->Wykres1->BackColor = System::Drawing::Color::LightBlue;
 			chartArea2->Name = L"ChartArea1";
 			this->Wykres1->ChartAreas->Add(chartArea2);
-			this->Wykres1->Location = System::Drawing::Point(286, 173);
+			this->Wykres1->Location = System::Drawing::Point(288, 173);
 			this->Wykres1->Name = L"Wykres1";
 			this->Wykres1->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::Bright;
 			this->Wykres1->RightToLeft = System::Windows::Forms::RightToLeft::No;
@@ -373,7 +380,7 @@ namespace MMM {
 			this->H1->AutoSize = true;
 			this->H1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->H1->Location = System::Drawing::Point(860, 100);
+			this->H1->Location = System::Drawing::Point(866, 71);
 			this->H1->Name = L"H1";
 			this->H1->Size = System::Drawing::Size(103, 18);
 			this->H1->TabIndex = 24;
@@ -384,7 +391,7 @@ namespace MMM {
 			this->H2->AutoSize = true;
 			this->H2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->H2->Location = System::Drawing::Point(860, 68);
+			this->H2->Location = System::Drawing::Point(866, 103);
 			this->H2->Name = L"H2";
 			this->H2->Size = System::Drawing::Size(103, 18);
 			this->H2->TabIndex = 25;
@@ -392,14 +399,14 @@ namespace MMM {
 			// 
 			// H1_T
 			// 
-			this->H1_T->Location = System::Drawing::Point(969, 101);
+			this->H1_T->Location = System::Drawing::Point(984, 72);
 			this->H1_T->Name = L"H1_T";
 			this->H1_T->Size = System::Drawing::Size(100, 20);
 			this->H1_T->TabIndex = 26;
 			// 
 			// H2_T
 			// 
-			this->H2_T->Location = System::Drawing::Point(969, 69);
+			this->H2_T->Location = System::Drawing::Point(984, 104);
 			this->H2_T->Name = L"H2_T";
 			this->H2_T->Size = System::Drawing::Size(100, 20);
 			this->H2_T->TabIndex = 27;
@@ -505,34 +512,63 @@ namespace MMM {
 			}
 
 			
-			calkowanie();
+			if (Sinus->Checked) { calkowanie(); }
+			else
+			{
+				MessageBox::Show("Podaj rodzaj sygna³u", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				return;
+			}
 		}
 
-	private:	 double funkcja (double x) 
+	private:	 double funkcja(double x, int zbiornik)
 		{
-			double funkcja = x;
+		double h = 1;
+		double A = 1;
+
+		if (zbiornik == 1) {
+			  h = Convert::ToDouble(H1_T->Text);  A = Convert::ToDouble(A1_T->Text);
+		}
+		else	if (zbiornik == 2) { h = Convert::ToDouble(H2_T->Text);  A = Convert::ToDouble(A2_T->Text);
+		}
+		else {
+			MessageBox::Show("Coœ siê nie zgadza w funkcji :/", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return 1;
+		}
+		
+		double omega =(2*PI/ (Convert::ToDouble(Okres_T->Text)));
+		double amplituda= Convert::ToDouble(Amplituda_T->Text);
+		double funkcja = (((amplituda*sin(omega*x)) - (A*sqrt(2 * g*h))) / (PI*h));
 			return funkcja;
 		}
 
 
 	private:	 void calkowanie()
 		{
-			double czas = Convert::ToInt32(Czas_T->Text), h, calka,p;
-			int n;
-				
-				n = Convert::ToInt32(Dok_T->Text); 
+		double czas = Convert::ToInt32(Czas_T->Text);
+			
+			double calka = 0;
+			int	dokladnosc = Convert::ToInt32(Dok_T->Text);   
  
-				h = czas / (float)n;
-				p = n / czas;
-
-				for (int i=0; i<n; i++)
+			double	h = czas / dokladnosc;
+			double	p = dokladnosc / czas;
+			double temp = 0;
+			double calka2 = 0;
+				for (int i=0; i<dokladnosc; i++)
 				{
-					calka += (funkcja(i * h)+funkcja((i+1)*h))*h/2;
-					dod_pkt1(((float)i+1)/p, calka);
+					calka += (funkcja(i * h,1)+funkcja((i+1)*h,1))*h/2;
+					temp = (funkcja(i * h, 1) + funkcja((i + 1)*h, 1))*h / 2;
+					calka2+= (funkcja(temp * h, 2) + funkcja((temp + 1)*h, 2))*h / 2;
+					dod_pkt1((i+1)/p, calka);
+					dod_pkt2((i+1)/p, calka2);
 				}
 				Wyn->Text = Convert::ToString(calka);
+
+				
+
  
 		}
+
+
 
 
 
