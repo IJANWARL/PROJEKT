@@ -429,7 +429,7 @@ namespace MMM {
 			this->Dok_T->Size = System::Drawing::Size(100, 20);
 			this->Dok_T->TabIndex = 30;
 			// 
-			// Dokladnosc
+			// Dokladnosc xd
 			// 
 			this->Dokladnosc->AutoSize = true;
 			this->Dokladnosc->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
