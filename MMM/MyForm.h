@@ -219,6 +219,7 @@ namespace MMM {
 				this->Amplituda_T->Name = L"Amplituda_T";
 				this->Amplituda_T->Size = System::Drawing::Size(100, 20);
 				this->Amplituda_T->TabIndex = 5;
+				this->Amplituda_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Amplituda_T_KeyPress);
 				// 
 				// Okres_T
 				// 
@@ -227,6 +228,7 @@ namespace MMM {
 				this->Okres_T->Name = L"Okres_T";
 				this->Okres_T->Size = System::Drawing::Size(100, 20);
 				this->Okres_T->TabIndex = 6;
+				this->Okres_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Okres_T_KeyPress);
 				// 
 				// A1_T
 				// 
@@ -235,6 +237,7 @@ namespace MMM {
 				this->A1_T->Name = L"A1_T";
 				this->A1_T->Size = System::Drawing::Size(100, 20);
 				this->A1_T->TabIndex = 7;
+				this->A1_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::A1_T_KeyPress);
 				// 
 				// A2_T
 				// 
@@ -243,6 +246,7 @@ namespace MMM {
 				this->A2_T->Name = L"A2_T";
 				this->A2_T->Size = System::Drawing::Size(100, 20);
 				this->A2_T->TabIndex = 8;
+				this->A2_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::A2_T_KeyPress);
 				// 
 				// Amplituda
 				// 
@@ -403,6 +407,7 @@ namespace MMM {
 				this->H1_T->Name = L"H1_T";
 				this->H1_T->Size = System::Drawing::Size(100, 20);
 				this->H1_T->TabIndex = 26;
+				this->H1_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::H1_T_KeyPress);
 				// 
 				// H2_T
 				// 
@@ -410,6 +415,7 @@ namespace MMM {
 				this->H2_T->Name = L"H2_T";
 				this->H2_T->Size = System::Drawing::Size(100, 20);
 				this->H2_T->TabIndex = 27;
+				this->H2_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::H2_T_KeyPress);
 				// 
 				// Czas
 				// 
@@ -428,6 +434,7 @@ namespace MMM {
 				this->Czas_T->Name = L"Czas_T";
 				this->Czas_T->Size = System::Drawing::Size(100, 20);
 				this->Czas_T->TabIndex = 29;
+				this->Czas_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Czas_T_KeyPress);
 				// 
 				// Dok_T
 				// 
@@ -435,6 +442,7 @@ namespace MMM {
 				this->Dok_T->Name = L"Dok_T";
 				this->Dok_T->Size = System::Drawing::Size(100, 20);
 				this->Dok_T->TabIndex = 30;
+				this->Dok_T->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Dok_T_KeyPress);
 				// 
 				// Dokladnosc
 				// 
@@ -574,6 +582,7 @@ namespace MMM {
 				this->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
 				this->Name = L"MyForm";
 				this->Text = L"MMM";
+				
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres2))->EndInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres1))->EndInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres3))->EndInit();
@@ -820,5 +829,94 @@ namespace MMM {
 			Wykres2->Series[0]->Points->Clear();
 			Wykres3->Series[0]->Points->Clear();
 		}
-	};
+	private: System::Void Amplituda_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+		if (e->KeyChar == ',')
+		{
+			if (this->Amplituda_T->Text->Contains(",") && !this->Amplituda_T->SelectedText->Contains(","))
+				e->Handled = true;
+		}
+		// Accept only digits "," and the Backspace character
+		else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+			e->Handled = true;
+	}
+
+
+private: System::Void Okres_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->Okres_T->Text->Contains(",") && !this->Okres_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void A1_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->A1_T->Text->Contains(",") && !this->A1_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void A2_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->A2_T->Text->Contains(",") && !this->A2_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void H1_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->H1_T->Text->Contains(",") && !this->H1_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void H2_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->H2_T->Text->Contains(",") && !this->H2_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void Czas_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	// Only allow 1 decimal point
+	if (e->KeyChar == ',')
+	{
+		if (this->Czas_T->Text->Contains(",") && !this->Czas_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+private: System::Void Dok_T_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+	if (e->KeyChar == ',')
+	{
+		if (this->Dok_T->Text->Contains(",") && !this->Dok_T->SelectedText->Contains(","))
+			e->Handled = true;
+	}
+	// Accept only digits "," and the Backspace character
+	else if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+		e->Handled = true;
+}
+
+};
 }
