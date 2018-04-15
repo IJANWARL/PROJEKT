@@ -27,7 +27,8 @@ namespace MMM {
 		
 		static int p = 1;
 		static double PI = M_PI;
-		static double g = 9.80665;
+	private: System::Windows::Forms::TextBox^  textBox1;
+			 static double g = 9.80665;
 		
 	
 		public:
@@ -138,6 +139,7 @@ namespace MMM {
 				this->Wykres3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 				this->clear3 = (gcnew System::Windows::Forms::Button());
 				this->clear4 = (gcnew System::Windows::Forms::Button());
+				this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres2))->BeginInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres1))->BeginInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres3))->BeginInit();
@@ -542,12 +544,20 @@ namespace MMM {
 				this->clear4->UseVisualStyleBackColor = false;
 				this->clear4->Click += gcnew System::EventHandler(this, &MyForm::clear4_Click);
 				// 
+				// textBox1
+				// 
+				this->textBox1->Location = System::Drawing::Point(12, 480);
+				this->textBox1->Name = L"textBox1";
+				this->textBox1->Size = System::Drawing::Size(1319, 20);
+				this->textBox1->TabIndex = 37;
+				// 
 				// MyForm
 				// 
 				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 				this->ClientSize = System::Drawing::Size(1343, 635);
+				this->Controls->Add(this->textBox1);
 				this->Controls->Add(this->clear4);
 				this->Controls->Add(this->clear3);
 				this->Controls->Add(this->Wykres3);
@@ -582,7 +592,6 @@ namespace MMM {
 				this->Margin = System::Windows::Forms::Padding(2, 4, 2, 4);
 				this->Name = L"MyForm";
 				this->Text = L"MMM";
-				
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres2))->EndInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres1))->EndInit();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Wykres3))->EndInit();
@@ -649,10 +658,9 @@ namespace MMM {
 		}
 
 
-		private:	 double funkcja(double x, int zbiornik)
+		private:	 double funkcja(double x, int zbiornik, double h1, double h2)
 		{
-			double h1 = Convert::ToDouble(H1_T->Text);
-			double h2 = Convert::ToDouble(H2_T->Text);
+			
 			double A1 = Convert::ToDouble(A1_T->Text);
 			double A2 = Convert::ToDouble(A2_T->Text);
 			double okres = (Convert::ToDouble(Okres_T->Text));
@@ -770,19 +778,24 @@ namespace MMM {
 			double calka2 = 0;
 			double okres = (Convert::ToDouble(Okres_T->Text));
 			double pom = 3*okres / dokladnosc;
+			double h1 = Convert::ToDouble(H1_T->Text);
+			double h2 = Convert::ToDouble(H2_T->Text);
 
 				for (int i=0; i<dokladnosc; i++)
 				{
-					calka += (funkcja(i*h, 1)+funkcja((i+1)*h, 1))*h/2;
+					
+					double x1 = calka;
+					double x2=calka2;
+					calka += (funkcja(i*h, 1,h1,h2)+funkcja((i+1)*h, 1, h1, h2))*h/2;
 										
 					if (calka < 0)
 					{
-						calka2 += (funkcja(i * h, 3) + funkcja((i + 1)*h, 3))*h/2;
+						calka2 += (funkcja(i * h, 3, h1, h2) + funkcja((i + 1)*h, 3, h1, h2))*h/2;
 					}
 					
 					else
 					{
-						calka2 += (funkcja(calka * h, 2) + funkcja((calka + 1)*h, 2))*h / 2;
+						calka2 += (funkcja(calka * h, 2, h1, h2) + funkcja((calka + 1)*h, 2, h1, h2))*h / 2;
 					}
 
 					if (calka2 < 0)
@@ -794,10 +807,13 @@ namespace MMM {
 					{
 						calka = 0;
 					}
+					h1 += calka - x1;
+					h2 += calka2 - x2;
 
 					dod_pkt1((i+1)/p, calka);
 					dod_pkt2((i+1)/p, calka2);					
-					dod_pkt3((i + 1) * pom, funkcja(i*pom, 0));
+					dod_pkt3((i + 1) * pom, funkcja(i*pom, 0, h1, h2));
+					textBox1->Text+= h1+"   ";
 					
 				}
 
